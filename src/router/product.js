@@ -24,7 +24,7 @@ router.post(
    "/product/create",
    requiresSignin,
    adminMiddleware,
-   upload.single("productPicture"),
+   upload.array("productPicture"),
    createProduct
 );
 //router.get("/category/getcategory", getCategories);
