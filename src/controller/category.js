@@ -2,7 +2,7 @@ const Category = require("../models/category.js");
 const slugify = require("slugify");
 
 function createCategories(categories, parentId = null) {
-   const categoryList = {};
+   const categoryList = [];
    let category;
    if (parentId == null) {
       category = categories.filter((cat) => cat.parentId == undefined);
