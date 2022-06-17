@@ -8,6 +8,7 @@ const adminRoutes = require("./router/admin/auth.js");
 const categoryRoutes = require("./router/category.js");
 const productRoutes = require("./router/product.js");
 const cartRoutes = require("./router/cart.js");
+const initialDataRoutes = require("./router/admin/initialData.js");
 const path = require("path");
 
 env.config();
@@ -44,6 +45,7 @@ app.use("/api", adminRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", productRoutes);
 app.use("/api", cartRoutes);
+app.use("/api", initialDataRoutes);
 
 app.get("/", (req, res, next) => {
    return res.status(200).json({
