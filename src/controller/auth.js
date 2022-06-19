@@ -1,5 +1,6 @@
 const User = require("../models/auth.js");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 // exports something with specific name
 exports.signup = (req, res) => {
