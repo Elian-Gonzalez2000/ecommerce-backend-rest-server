@@ -7,6 +7,7 @@ exports.createProduct = (req, res) => {
    //res.status(200).json({ file: req.files, body: req.body });
    const { name, price, description, category, quantity, createdBy } = req.body;
    let productPictures = [];
+   console.log("Cosa importante: ", req.user, "  ===  ", createdBy);
 
    if (req.files.length > 0) {
       productPictures = req.files.map((file) => {
@@ -31,4 +32,50 @@ exports.createProduct = (req, res) => {
          res.status(201).json({ product });
       }
    });
+};
+
+exports.getProductsBySlug = (req, res) => {
+   const { slug } = req.params;
+   Category.findOne({ slug: slug })
+      .select("_id")
+      .exec((error, category) => {
+         if (error) {
+            res.status(400).json({ error });
+         }
+
+         if (category) {
+            Product.find({ category: category._id }).exec((error, products) => {
+               if (error) {
+                  res.status(400).json({ error });
+               }
+
+               if (products.length > 0) {
+                  res.status(200).json({
+                     products,
+                     productsByPrice: {
+                        under5k: products.filter(
+                           (product) => product.price <= 5000
+                        ),
+                        under10k: products.filter(
+                           (product) =>
+                              product.price > 5000 && product.price <= 10000
+                        ),
+                        under15k: products.filter(
+                           (product) =>
+                              product.price > 10000 && product.price <= 15000
+                        ),
+                        under10k: products.filter(
+                           (product) =>
+                              product.price > 15000 && product.price <= 20000
+                        ),
+                        under10k: products.filter(
+                           (product) =>
+                              product.price > 20000 && product.price <= 30000
+                        ),
+                     },
+                  });
+               }
+            });
+         }
+      });
 };
