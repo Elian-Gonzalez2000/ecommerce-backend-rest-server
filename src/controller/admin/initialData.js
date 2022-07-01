@@ -16,6 +16,7 @@ function createCategories(categories, parentId = null) {
          name: cate.name,
          slug: cate.slug,
          parentId: cate.parentId,
+         type: cate.type,
          children: createCategories(categories, cate._id),
       });
    }
@@ -24,14 +25,18 @@ function createCategories(categories, parentId = null) {
 }
 
 exports.initialData = async (req, res) => {
-   const categories = await Category.find({}).exec();
-   const products = await Product.find({})
-      .select("_id name price quantity description productPicture category")
-      .populate({ path: "category", select: "_id name" })
-      .exec();
+   try {
+      const categories = await Category.find({}).exec();
+      const products = await Product.find({ createdBy: req.user._id })
+         .select("_id name price quantity description productPicture category")
+         .populate({ path: "category", select: "_id name" })
+         .exec();
 
-   res.status(200).json({
-      categories: createCategories(categories),
-      products,
-   });
+      res.status(200).json({
+         categories: createCategories(categories),
+         products,
+      });
+   } catch (err) {
+      console.log(err);
+   }
 };
