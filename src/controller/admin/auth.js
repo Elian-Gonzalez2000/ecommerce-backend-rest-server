@@ -49,11 +49,11 @@ exports.signin = (req, res) => {
                { _id: user._id, role: user.role },
                process.env.JWT_SECRET,
                {
-                  expiresIn: "2h",
+                  expiresIn: "2d",
                }
             );
             const { _id, firstName, lastName, email, role, fullName } = user;
-            res.cookie("token", token, { expiresIn: "1d" });
+            res.cookie("token", token, { expiresIn: "2d" });
             res.status(200).json({
                token,
                user: {
