@@ -1,4 +1,5 @@
 const Product = require("../models/product.js");
+const Category = require("../models/category.js");
 const multer = require("multer");
 const shortid = require("shortid");
 const slugify = require("slugify");
@@ -7,7 +8,6 @@ exports.createProduct = (req, res) => {
    //res.status(200).json({ file: req.files, body: req.body });
    const { name, price, description, category, quantity, createdBy } = req.body;
    let productPictures = [];
-   console.log("Cosa importante: ", req.user, "  ===  ", createdBy);
 
    if (req.files.length > 0) {
       productPictures = req.files.map((file) => {
@@ -64,11 +64,11 @@ exports.getProductsBySlug = (req, res) => {
                            (product) =>
                               product.price > 10000 && product.price <= 15000
                         ),
-                        under10k: products.filter(
+                        under20k: products.filter(
                            (product) =>
                               product.price > 15000 && product.price <= 20000
                         ),
-                        under10k: products.filter(
+                        under30k: products.filter(
                            (product) =>
                               product.price > 20000 && product.price <= 30000
                         ),
