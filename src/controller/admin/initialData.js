@@ -28,7 +28,7 @@ exports.initialData = async (req, res) => {
    try {
       const categories = await Category.find({}).exec();
       const products = await Product.find({ createdBy: req.user._id })
-         .select("_id name price quantity description productPicture category")
+         .select("_id name price quantity description productPictures category")
          .populate({ path: "category", select: "_id name" })
          .exec();
 
