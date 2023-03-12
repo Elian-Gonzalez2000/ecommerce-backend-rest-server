@@ -3,7 +3,11 @@ const {
    requiresSignin,
    adminMiddleware,
 } = require("../common-middleware/index.js");
-const { addCategory, getCategories } = require("../controller/category.js");
+const {
+   addCategory,
+   getCategories,
+   updateCategory,
+} = require("../controller/category.js");
 const router = express.Router();
 const shortid = require("shortid");
 const path = require("path");
@@ -28,5 +32,6 @@ router.post(
    addCategory
 );
 router.get("/category/getcategory", getCategories);
+router.post("/category/update", upload.array("categoryImage"), updateCategory);
 
 module.exports = router;
