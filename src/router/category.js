@@ -7,6 +7,7 @@ const {
    addCategory,
    getCategories,
    updateCategory,
+   deleteCategories,
 } = require("../controller/category.js");
 const router = express.Router();
 const shortid = require("shortid");
@@ -33,5 +34,6 @@ router.post(
 );
 router.get("/category/getcategory", getCategories);
 router.post("/category/update", upload.array("categoryImage"), updateCategory);
+router.post("/category/delete", deleteCategories);
 
 module.exports = router;
