@@ -16,6 +16,7 @@ function createCategories(categories, parentId = null) {
          _id: cate._id,
          name: cate.name,
          slug: cate.slug,
+         type: cate.type,
          parentId: cate.parentId,
          children: createCategories(categories, cate._id),
       });
@@ -79,7 +80,7 @@ exports.updateCategory = async (req, res) => {
          );
          updatedCategories.push(updateCategory);
       }
-      console.log(updatedCategories);
+      ///console.log(updatedCategories);
       res.status(201).json({ updatedCategories });
    } else {
       const category = {
