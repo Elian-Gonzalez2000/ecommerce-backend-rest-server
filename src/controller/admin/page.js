@@ -16,5 +16,16 @@ exports.createPage = (req, res) => {
       }));
    }
 
+   req.body.createdBy = req.user._id;
+
+   const page = new Page(req.body);
+
+   page.save((error, page) => {
+      if (error) res.status(400).json({ error });
+      if (page) {
+         return res.status(201).json({ page });
+      }
+   });
+
    res.status(200).json({ body: req.body });
 };
