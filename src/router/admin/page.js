@@ -4,7 +4,7 @@ const {
    adminMiddleware,
    requiresSignin,
 } = require("../../common-middleware/index.js");
-const { createPage } = require("../../controller/admin/page.js");
+const { createPage, getPage } = require("../../controller/admin/page.js");
 const router = express.Router();
 
 router.post(
@@ -17,5 +17,7 @@ router.post(
    ]),
    createPage
 );
+
+router.get("/page/:category/:type", getPage);
 
 module.exports = router;
