@@ -18,7 +18,6 @@ env.config();
 const { PORT, MONGO_DB_USER, MONGO_DB_PASSWORD, MONGO_DB_DATABASE } =
    process.env;
 
-   console.log(MONGO_DB_USER, MONGO_DB_PASSWORD, MONGO_DB_DATABASE)
 //Mongoose connection
 mongoose
    .connect(

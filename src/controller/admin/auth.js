@@ -1,7 +1,10 @@
 const User = require("../../models/auth.js");
+const env = require("dotenv");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const shortid = require("shortid");
+
+env.config()
 
 // exports something with specific name
 exports.signup = (req, res) => {
@@ -12,7 +15,7 @@ exports.signup = (req, res) => {
          });
 
       const { firstName, lastName, email, password } = req.body;
-      const hash_password = bcrypt.hash(password, 10);
+      const hash_password = await bcrypt.hash(password, 10);
       const _user = new User({
          firstName,
          lastName,
