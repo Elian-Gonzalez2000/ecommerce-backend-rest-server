@@ -15,7 +15,6 @@ exports.addItemToCart = (req, res) => {
          // if cart already exists then update cart by quantity
 
          let promiseArray = [];
-
          req.body.cartItems.forEach((cartItem) => {
             const product = cartItem.product;
             const item = cart.cartItems.find((c) => c.product == product);
