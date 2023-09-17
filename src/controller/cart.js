@@ -79,6 +79,7 @@ exports.getCartItems = (req, res) => {
                   quantity: item.quantity,
                };
             });
+            res.status(200).json({ cartItems });
          }
       });
 };
