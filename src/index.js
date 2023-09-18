@@ -5,6 +5,7 @@ const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
 const authRoutes = require("./router/auth.js");
+const addressRoutes = require("./router/address.js");
 const adminRoutes = require("./router/admin/auth.js");
 const categoryRoutes = require("./router/category.js");
 const productRoutes = require("./router/product.js");
@@ -29,7 +30,8 @@ mongoose
    )
    .then(() => {
       console.log("Database Connected");
-   }).catch((error)=>console.log(error));
+   })
+   .catch((error) => console.log(error));
 
 app.use(express.json());
 app.use(
@@ -42,6 +44,7 @@ app.use(
 ); // Allow everyone to share resources
 app.use("/public", express.static(path.join(__dirname, "../uploads")));
 app.use("/api", authRoutes);
+app.use("/api", addressRoutes);
 app.use("/api", adminRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", productRoutes);
