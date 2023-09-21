@@ -12,6 +12,7 @@ const productRoutes = require("./router/product.js");
 const cartRoutes = require("./router/cart.js");
 const initialDataRoutes = require("./router/admin/initialData.js");
 const pageRoutes = require("./router/admin/page.js");
+const orderRoutes = require("./router/order.js");
 
 env.config();
 
@@ -51,6 +52,7 @@ app.use("/api", productRoutes);
 app.use("/api", cartRoutes);
 app.use("/api", initialDataRoutes);
 app.use("/api", pageRoutes);
+app.use("/api", orderRoutes);
 
 app.get("/", (req, res, next) => {
    return res.status(200).json({
