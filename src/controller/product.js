@@ -48,32 +48,35 @@ exports.getProductsBySlug = (req, res) => {
                if (error) {
                   res.status(400).json({ error });
                }
-
-               if (products.length > 0) {
-                  res.status(200).json({
-                     products,
-                     productsByPrice: {
-                        under5k: products.filter(
-                           (product) => product.price <= 5000
-                        ),
-                        under10k: products.filter(
-                           (product) =>
-                              product.price > 5000 && product.price <= 10000
-                        ),
-                        under15k: products.filter(
-                           (product) =>
-                              product.price > 10000 && product.price <= 15000
-                        ),
-                        under20k: products.filter(
-                           (product) =>
-                              product.price > 15000 && product.price <= 20000
-                        ),
-                        under30k: products.filter(
-                           (product) =>
-                              product.price > 20000 && product.price <= 30000
-                        ),
-                     },
-                  });
+               if (!category.type) {
+                  if (products.length > 0) {
+                     res.status(200).json({
+                        products,
+                        productsByPrice: {
+                           under5k: products.filter(
+                              (product) => product.price <= 5000
+                           ),
+                           under10k: products.filter(
+                              (product) =>
+                                 product.price > 5000 && product.price <= 10000
+                           ),
+                           under15k: products.filter(
+                              (product) =>
+                                 product.price > 10000 && product.price <= 15000
+                           ),
+                           under20k: products.filter(
+                              (product) =>
+                                 product.price > 15000 && product.price <= 20000
+                           ),
+                           under30k: products.filter(
+                              (product) =>
+                                 product.price > 20000 && product.price <= 30000
+                           ),
+                        },
+                     });
+                  }
+               } else {
+                  res.status(200).json({ products });
                }
             });
          }
