@@ -37,6 +37,24 @@ const orderSchema = new moongose.Schema(
          enum: ["pending", "completed", "cancelled", "refund"],
          required: true,
       },
+      paymentType: {
+         type: String,
+         enum: ["cod", "card"],
+         required: true,
+      },
+      orderStatus: [
+         {
+            type: {
+               type: String,
+               enum: ["ordened", "packed", "shipped", "delivered"],
+               default: "ordened",
+            },
+            date: {
+               type: Date,
+            },
+            isCompleted: { type: Boolean, default: "false" },
+         },
+      ],
    },
    { timestamps: true }
 );
