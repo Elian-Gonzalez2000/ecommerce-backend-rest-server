@@ -38,10 +38,11 @@ exports.signup = (req, res) => {
 };
 
 exports.signin = (req, res) => {
-   User.findOne({ email: req.body.email }).exec((error, user) => {
+   User.findOne({ email: req.body.email }).exec(async (error, user) => {
       if (error) return res.status(400).json({ error });
       if (user) {
-         if (user.authenticate(req.body.password) && user.role === "user") {
+         const isPassword = await user.authenticate(req.body.password);
+         if (isPassword && user.role === "user") {
             // Create a token with JsonWebToken, expires in 2 hours
             const token = jwt.sign(
                { _id: user._id, role: user.role },
