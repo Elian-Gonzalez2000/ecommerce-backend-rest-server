@@ -2,7 +2,7 @@ const Order = require("../../models/order.js");
 
 exports.updateOrder = (req, res) => {
    Order.updateOne(
-      { user: req.body.userId, "orderStatus.type": req.body.type },
+      { _id: req.body.orderId, "orderStatus.type": req.body.type },
       {
          $set: {
             "orderStatus.$": [
