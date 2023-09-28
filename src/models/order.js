@@ -46,7 +46,7 @@ const orderSchema = new moongose.Schema(
          {
             type: {
                type: String,
-               enum: ["ordened", "packed", "shipped", "delivered"],
+               enum: ["ordered", "packed", "shipped", "delivered"],
                default: "ordened",
             },
             date: {
