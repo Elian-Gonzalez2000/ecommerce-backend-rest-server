@@ -7,6 +7,8 @@ const {
    createProduct,
    getProductsBySlug,
    getProductDetailsById,
+   deleteProductById,
+   getProducts,
 } = require("../controller/product.js");
 const multer = require("multer");
 const router = express.Router();
@@ -34,5 +36,17 @@ router.post(
 
 router.post("/products/:slug", getProductsBySlug);
 router.get("/product/:productId", getProductDetailsById);
+router.delete(
+   "/product/deleteproductbyid",
+   requiresSignin,
+   adminMiddleware,
+   deleteProductById
+);
+router.post(
+   "/product/getproducts",
+   requiresSignin,
+   adminMiddleware,
+   getProducts
+);
 
 module.exports = router;
