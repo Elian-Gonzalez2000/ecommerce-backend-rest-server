@@ -40,7 +40,7 @@ app.use(
    cors({
       origin: "*",
       credentials: true,
-      methods: ["GET", "POST"],
+      methods: ["GET", "POST", "DELETE"],
       allowedHeaders: ["Content-Type", "Authorization"],
    })
 ); // Allow everyone to share resources
